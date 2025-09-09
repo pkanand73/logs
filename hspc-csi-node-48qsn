@@ -1,0 +1,157 @@
+[pnbone@corpdcbastion ~]$ oc describe po hspc-csi-node-48qsn
+Name:             hspc-csi-node-48qsn
+Namespace:        kube-system
+Priority:         0
+Service Account:  hspc-csi-sa
+Node:             corpdcworker4.corpdc.mypnbone.in/10.192.245.10
+Start Time:       Tue, 09 Sep 2025 14:59:27 +0530
+Labels:           app=hspc-csi-driver
+                  controller-revision-hash=7cb7bcb9f9
+                  pod-template-generation=13
+Annotations:      <none>
+Status:           Running
+IP:               10.192.245.10
+IPs:
+  IP:           10.192.245.10
+Controlled By:  DaemonSet/hspc-csi-node
+Containers:
+  driver-registrar:
+    Container ID:  cri-o://17206f48d958128a5a16c7f18d86a5459afedf8037df3ab1d77d4ae936d872a7
+    Image:         registry.k8s.io/sig-storage/csi-node-driver-registrar@sha256:a18e989a93722e43885120e90bc1d0da0740fcbf44bc10403572b368b9800606
+    Image ID:      registry.k8s.io/sig-storage/csi-node-driver-registrar@sha256:a18e989a93722e43885120e90bc1d0da0740fcbf44bc10403572b368b9800606
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      -v=5
+      -csi-address=/csi/csi.sock
+      -kubelet-registration-path=/var/lib/kubelet/plugins/hspc.csi.hitachi.com/csi.sock
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Tue, 09 Sep 2025 15:10:32 +0530
+      Finished:     Tue, 09 Sep 2025 15:10:34 +0530
+    Ready:          False
+    Restart Count:  7
+    Limits:
+      cpu:     500m
+      memory:  500Mi
+    Requests:
+      cpu:     30m
+      memory:  50Mi
+    Environment:
+      KUBE_NODE_NAME:   (v1:spec.nodeName)
+    Mounts:
+      /csi from socket-dir (rw)
+      /etc/localtime from localtime (ro)
+      /registration from registration-dir (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-gfsxh (ro)
+  hspc-csi-driver:
+    Container ID:   cri-o://981d3d78f8376a933060895733cdab988486e5ee68f924863aa9bc4667466234
+    Image:          registry.hitachivantara.com/hitachicsi-oci-oss/hspc-csi-driver@sha256:2c580d98be55fffd8f6083379b6f23cbfe2aeb42fc4aec9e890072bc831c87c4
+    Image ID:       registry.hitachivantara.com/hitachicsi-oci-oss/hspc-csi-driver@sha256:2c580d98be55fffd8f6083379b6f23cbfe2aeb42fc4aec9e890072bc831c87c4
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Tue, 09 Sep 2025 15:10:32 +0530
+      Finished:     Tue, 09 Sep 2025 15:10:34 +0530
+    Ready:          False
+    Restart Count:  7
+    Limits:
+      cpu:     500m
+      memory:  500Mi
+    Requests:
+      cpu:     30m
+      memory:  50Mi
+    Environment:
+      CSI_ENDPOINT:    unix:///csi/csi.sock
+      KUBE_NODE_NAME:   (v1:spec.nodeName)
+    Mounts:
+      /csi from socket-dir (rw)
+      /dev from device-dir (rw)
+      /etc/host-os-release from release-file (ro)
+      /etc/iscsi/initiatorname.iscsi from iscsi-dir (rw)
+      /etc/localtime from localtime (ro)
+      /host from host-dir (rw)
+      /sys from sys-dir (rw)
+      /var/lib/kubelet from kubelet-dir (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-gfsxh (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       False
+  ContainersReady             False
+  PodScheduled                True
+Volumes:
+  socket-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/lib/kubelet/plugins/hspc.csi.hitachi.com
+    HostPathType:  DirectoryOrCreate
+  kubelet-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/lib/kubelet
+    HostPathType:  DirectoryOrCreate
+  release-file:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/os-release
+    HostPathType:
+  localtime:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/localtime
+    HostPathType:
+  device-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /dev
+    HostPathType:
+  sys-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /sys
+    HostPathType:
+  iscsi-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /etc/iscsi/initiatorname.iscsi
+    HostPathType:
+  registration-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/lib/kubelet/plugins_registry
+    HostPathType:  Directory
+  host-dir:
+    Type:          HostPath (bare host directory volume)
+    Path:          /
+    HostPathType:
+  kube-api-access-gfsxh:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+    ConfigMapName:           openshift-service-ca.crt
+    ConfigMapOptional:       <nil>
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/disk-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/memory-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/network-unavailable:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists
+                             node.kubernetes.io/pid-pressure:NoSchedule op=Exists
+                             node.kubernetes.io/unreachable:NoExecute op=Exists
+                             node.kubernetes.io/unschedulable:NoSchedule op=Exists
+Events:
+  Type     Reason     Age                 From               Message
+  ----     ------     ----                ----               -------
+  Normal   Scheduled  11m                 default-scheduler  Successfully assigned kube-system/hspc-csi-node-48qsn to corpdcworker4.corpdc.mypnbone.in
+  Normal   Pulled     11m (x3 over 11m)   kubelet            Container image "registry.k8s.io/sig-storage/csi-node-driver-registrar@sha256:a18e989a93722e43885120e90bc1d0da0740fcbf44bc10403572b368b9800606" already present on machine
+  Normal   Created    11m (x3 over 11m)   kubelet            Created container: driver-registrar
+  Normal   Started    11m (x3 over 11m)   kubelet            Started container driver-registrar
+  Normal   Pulled     11m (x3 over 11m)   kubelet            Container image "registry.hitachivantara.com/hitachicsi-oci-oss/hspc-csi-driver@sha256:2c580d98be55fffd8f6083379b6f23cbfe2aeb42fc4aec9e890072bc831c87c4" already present on machine
+  Normal   Created    11m (x3 over 11m)   kubelet            Created container: hspc-csi-driver
+  Normal   Started    11m (x3 over 11m)   kubelet            Started container hspc-csi-driver
+  Warning  BackOff    11m (x3 over 11m)   kubelet            Back-off restarting failed container hspc-csi-driver in pod hspc-csi-node-48qsn_kube-system(1336bc16-5eb7-4eb3-99d8-afd9e4dfede4)
+  Warning  BackOff    72s (x48 over 11m)  kubelet            Back-off restarting failed container driver-registrar in pod hspc-csi-node-48qsn_kube-system(1336bc16-5eb7-4eb3-99d8-afd9e4dfede4)
+[pnbone@corpdcbastion ~]$
